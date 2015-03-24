@@ -42,7 +42,7 @@ describe Spree::FlowdockOrderConfirmation do
 
   describe '#push' do
     it "pushes a order confirmation to the flow's team inbox" do
-      #pending 'find a way to mock flowdock'
+      pending 'find a way to mock flowdock'
 
       order = create(:order)
       config_flow_api_token
