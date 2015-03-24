@@ -1,0 +1,29 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= t('flowdock.settings.title') %>
+<% end %>
+
+<%= form_for(@config, :as => "flowdock_configuration", :url => admin_flowdock_settings_path, :method => :put) do |form| %>
+
+<fieldset class="no-border-top">
+
+  <fieldset class="no-border-bottom">
+    <legend align="center">
+      <%= t('flowdock.settings.flow_api_token') %>
+    </legend>
+    <div class="row frameless">
+      <div class="field twelve columns">
+        <%= label_tag("preferences[flow_api_token]", t('flowdock.settings.flow_api_token')) %> <span class="required">*</span>
+        <%= preference_field_tag("preferences[flow_api_token]", @config[:flow_api_token], :type => :string) %>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= button Spree.t(:update), 'icon-refresh' %>
+  </div>
+
+</fieldset>
+
+<% end %>

@@ -1,0 +1,10 @@
+en:
+  flowdock:
+    settings:
+      flow_api_token: Flow API Token
+      link: Flowdock
+      title: Flowdock Settings
+    order:
+      confirmation:
+        subject: "New incoming order at %{store_name}!"
+        content_html: "Order number: %{order_number}<br/>Total: %{order_total}"
