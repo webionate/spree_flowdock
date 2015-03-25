@@ -10,12 +10,12 @@
 
   <fieldset class="no-border-bottom">
     <legend align="center">
-      <%= t('flowdock.settings.flow_api_token') %>
+      <%= t('flowdock.settings.api_tokens') %>
     </legend>
     <div class="row frameless">
       <div class="field twelve columns">
-        <%= label_tag("preferences[flow_api_token]", t('flowdock.settings.flow_api_token')) %> <span class="required">*</span>
-        <%= preference_field_tag("preferences[flow_api_token]", @config[:flow_api_token], :type => :string) %>
+        <%= label_tag("preferences[api_token_order_confirmation]", t('flowdock.order.confirmation.api_token')) %> <span class="required">*</span>
+        <%= preference_field_tag("preferences[api_token_order_confirmation]", @config[:api_token_order_confirmation], :type => :string) %>
       </div>
     </div>
   </fieldset>

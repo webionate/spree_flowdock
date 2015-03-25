@@ -1,3 +1,3 @@
 class Spree::FlowdockConfiguration < Spree::Preferences::Configuration
-  preference :flow_api_token, :string, default: ''
+  preference :api_token_order_confirmation, :string, default: ''
 end

@@ -7,19 +7,17 @@ module Spree
 
     def initialize(order)
       raise ArgumentError.new('Order missing.') if order.blank?
-      raise ArgumentError.new('Flowdock API token not configured.') if flow_api_token.blank?
-      raise ArgumentError.new('Current store name not configured.') if current_store.name.blank?
-      raise ArgumentError.new('Current store mail_from_address not configured.') if current_store.mail_from_address.blank?
 
       @flow = flow
       @order = order
     end
 
     def push
+      return false if @flow.nil?
       # send message to Team Inbox
       @flow.push_to_team_inbox(
-        subject: I18n.t('flowdock.order.confirmation.subject', store_name: current_store.name ),
-        content: I18n.t('flowdock.order.confirmation.content_html', order_number: @order.number, order_total: @order.total ),
+        subject: I18n.t('flowdock.order.confirmation.subject', store_name: current_store.name),
+        content: I18n.t('flowdock.order.confirmation.content_html', order_number: @order.number, order_total: @order.display_total),
         tags: tags,
         link: link
       )
@@ -28,12 +26,16 @@ module Spree
     private
 
     def flow
+      if api_token.blank?
+        Rails.logger.error "Flowdock order confirmation API token is not configured."
+        return nil
+      end
       # create a new Flow object with target flow's api token and sender information for Team Inbox posting
-      Flowdock::Flow.new(api_token: flow_api_token, source: current_store.name, from: { name: current_store.name , address: current_store.mail_from_address})
+      Flowdock::Flow.new(api_token: api_token, source: source, from: { name: name, address: address })
     end
 
-    def flow_api_token
-      @_flow_api_token ||= flowdock_configuration.flow_api_token
+    def api_token
+      @_api_token ||= flowdock_configuration.api_token_order_confirmation
     end
 
     def flowdock_configuration
@@ -44,8 +46,20 @@ module Spree
       @_store ||= Spree::Store.current(Rails.env)
     end
 
+    def source
+      current_store.name ||= Rails.application.class.parent_name
+    end
+
+    def name
+      source
+    end
+
+    def address
+      current_store.mail_from_address ||= 'spree@example.com'
+    end
+
     def tags
-      tags = [Rails.env, 'order', 'incoming', @order.number]
+      [Rails.env, 'order', 'incoming', @order.number]
     end
 
     def link

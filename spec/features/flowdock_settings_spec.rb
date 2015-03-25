@@ -17,7 +17,7 @@ feature 'view the flowdock settings' do
 
   scenario 'admin sees a input field for the api token' do
     visit spree.edit_admin_flowdock_settings_path
-    expect(page).to have_field('preferences[flow_api_token]')
+    expect(page).to have_field('preferences[api_token_order_confirmation]')
   end
 
   scenario 'admin sees a link to update the flowdock settings' do
@@ -27,8 +27,8 @@ feature 'view the flowdock settings' do
 
   scenario 'user can update the flowdock.io settings' do
     visit spree.edit_admin_flowdock_settings_path
-    fill_in('preferences[flow_api_token]', with: 'z8o7ctz74rnt78')
+    fill_in('preferences[api_token_order_confirmation]', with: 'z8o7ctz74rnt78')
     page.click_link_or_button('Update')
-    expect(page.find_field('preferences[flow_api_token]').value).to eq 'z8o7ctz74rnt78'
+    expect(page.find_field('preferences[api_token_order_confirmation]').value).to eq 'z8o7ctz74rnt78'
   end
 end

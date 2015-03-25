@@ -1,23 +1,29 @@
 SpreeFlowdock
-==================
+=============
 
-Introduction goes here.
+This extensions adds a - at this point limited - Flowdock integration to Spree Commerce.
+
+So far you can receive an order confirmation within the team inbox of a defined flow.
+
+The message will inform you about a completed order directly after the customer finishes the frontend checkout process. Moreover the message will contain the order number, the order total and a link to the order within the admin interface.
 
 Installation
 ------------
 
-Add spree_flowdock to your Gemfile:
+Add spree_flowdock for Spree Commerce 2.4.5 to your Gemfile:
 
 ```ruby
-gem 'spree_flowdock'
+gem 'spree_flowdock', git: 'https://github.com/webionate/spree_flowdock.git', branch: '2-4-stable'
 ```
 
-Bundle your dependencies and run the installation generator:
+Configuration
+-------------
 
-```shell
-bundle
-bundle exec rails g spree_flowdock:install
-```
+  * Go to Spree's admin interface and select the configuration tab from main nav.
+  * Select Flowdock from the right hand second level menu.
+  * Enter the API token of the flow you would like to push messages to.
+
+You can find your Flowdock API tokens here: https://www.flowdock.com/account/tokens
 
 Testing
 -------
@@ -29,11 +35,4 @@ bundle
 bundle exec rake
 ```
 
-When testing your applications integration with this extension you may use it's factories.
-Simply add this require statement to your spec_helper:
-
-```ruby
-require 'spree_flowdock/factories'
-```
-
-Copyright (c) 2015 [name of extension creator], released under the New BSD License
+Copyright (c) 2015 webionate GmbH, released under the New BSD License

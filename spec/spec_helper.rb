@@ -30,13 +30,19 @@ require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
+require 'spree/testing_support/preferences'
 
-# Requires factories defined in lib/spree_flowdock/factories.rb
-require 'spree_flowdock/factories'
+require 'spree/api/testing_support/helpers'
+require 'spree/api/testing_support/setup'
+
+require 'webmock/rspec'
+require 'capybara/poltergeist'
+
+WebMock.disable_net_connect!(allow_localhost: true)
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
   # Infer an example group's spec type from the file location.
   config.infer_spec_type_from_file_location!
 
@@ -47,6 +53,12 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::Api::TestingSupport::Helpers, type: :controller
+  config.extend Spree::Api::TestingSupport::Setup, type: :controller
+  config.include Spree::TestingSupport::Preferences, :type => :controller
+  config.before do
+    Spree::Api::Config[:requires_authentication] = true
+  end
 
   # == Mock Framework
   #
@@ -86,3 +98,5 @@ RSpec.configure do |config|
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
 end
+
+Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each {|f| require f}
