@@ -9,3 +9,10 @@ de:
         api_token: API Token für Bestelleingang
         subject: "Es ist eine neue Bestellung bei %{store_name} eingegangen!"
         content_html: "Bestellnummer: %{order_number}<br/>Bestellwert: %{order_total}"
+    inbox_message:
+      api_token: API Token für Inbox-Nachricht
+      subject: "%{message_type} von %{store_name}!"
+      type:
+        info: Information
+        error: Fehler
+        warning: Warnung

@@ -16,6 +16,9 @@
       <div class="field twelve columns">
         <%= label_tag("preferences[api_token_order_confirmation]", t('flowdock.order.confirmation.api_token')) %> <span class="required">*</span>
         <%= preference_field_tag("preferences[api_token_order_confirmation]", @config[:api_token_order_confirmation], :type => :string) %>
+      </div><div class="field twelve columns">
+        <%= label_tag("preferences[api_token_inbox_message]", t('flowdock.inbox_message')) %> <span class="required">*</span>
+        <%= preference_field_tag("preferences[api_token_inbox_message]", @config[:api_token_inbox_message], :type => :string) %>
       </div>
     </div>
   </fieldset>

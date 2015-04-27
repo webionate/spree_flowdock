@@ -9,3 +9,10 @@ en:
         api_token: API token for oder confirmation
         subject: "New incoming order at %{store_name}!"
         content_html: "Order number: %{order_number}<br/>Total: %{order_total}"
+    inbox_message:
+      api_token: API token for a common inbox message
+      subject: "New %{message_type} at %{store_name}!"
+      type:
+        info: information
+        error: error
+        warning: warning
