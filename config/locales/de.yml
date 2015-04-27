@@ -14,5 +14,5 @@ de:
       subject: "%{message_type} von %{store_name}!"
       type:
         info: Information
-        error: Fehler
+        error: Fehlerbenachrichtigung
         warning: Warnung
