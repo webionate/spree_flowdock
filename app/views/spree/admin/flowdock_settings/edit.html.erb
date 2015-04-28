@@ -5,28 +5,31 @@
 <% end %>
 
 <%= form_for(@config, :as => "flowdock_configuration", :url => admin_flowdock_settings_path, :method => :put) do |form| %>
-
-<fieldset class="no-border-top">
-
-  <fieldset class="no-border-bottom">
-    <legend align="center">
-      <%= t('flowdock.settings.api_tokens') %>
-    </legend>
-    <div class="row frameless">
-      <div class="field twelve columns">
-        <%= label_tag("preferences[api_token_order_confirmation]", t('flowdock.order.confirmation.api_token')) %> <span class="required">*</span>
-        <%= preference_field_tag("preferences[api_token_order_confirmation]", @config[:api_token_order_confirmation], :type => :string) %>
-      </div><div class="field twelve columns">
-        <%= label_tag("preferences[api_token_inbox_message]", t('flowdock.inbox_message.api_token')) %> <span class="required">*</span>
-        <%= preference_field_tag("preferences[api_token_inbox_message]", @config[:api_token_inbox_message], :type => :string) %>
-      </div>
-    </div>
-  </fieldset>
-
-  <div class="form-buttons filter-actions actions" data-hook="buttons">
-    <%= button Spree.t(:update), 'icon-refresh' %>
+  <div id="preferences" data-hook>
+      <fieldset class="general no-border-top">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default security">
+              <div class="panel-heading">
+                <h1 class="panel-title">
+                  <%= t('flowdock.settings.api_tokens') %>
+                </h1>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <%= label_tag("preferences[api_token_order_confirmation]", t('flowdock.order.confirmation.api_token')) %>
+                  <%= preference_field_tag("preferences[api_token_order_confirmation]", @config[:api_token_order_confirmation], :type => :string) %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag("preferences[api_token_inbox_message]", t('flowdock.inbox_message.api_token')) %>
+                  <%= preference_field_tag("preferences[api_token_inbox_message]", @config[:api_token_inbox_message], :type => :string) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions" data-hook="buttons">
+            <%= button Spree.t('actions.update'), 'save' %>
+          </div>
+      </fieldset>
   </div>
-
-</fieldset>
-
 <% end %>
