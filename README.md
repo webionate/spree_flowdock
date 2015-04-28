@@ -10,10 +10,10 @@ The message will inform you about a completed order directly after the customer 
 Installation
 ------------
 
-Add spree_flowdock for Spree Commerce 2.4.5 to your Gemfile:
+Add spree_flowdock for Spree Commerce 3.0.0 to your Gemfile:
 
 ```ruby
-gem 'spree_flowdock', git: 'https://github.com/webionate/spree_flowdock.git', branch: '2-4-stable'
+gem 'spree_flowdock', git: 'https://github.com/webionate/spree_flowdock.git', branch: '3-0-stable'
 ```
 
 Configuration
